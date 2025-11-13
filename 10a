@@ -1,0 +1,24 @@
+from skimage.segmentation import felzenszwalb, mark_boundaries
+from skimage import io
+import matplotlib.pyplot as plt
+
+# Load image
+img = io.imread("person.jpg")
+
+# Graph-based segmentation (Felzenszwalb-Huttenlocher)
+segments = felzenszwalb(img, scale=100, sigma=0.5, min_size=100)
+
+# Show results
+plt.figure(figsize=(12,5))
+
+plt.subplot(1,2,1)
+plt.imshow(img)
+plt.title("Original Image")
+plt.axis('off')
+
+plt.subplot(1,2,2)
+plt.imshow(mark_boundaries(img, segments))
+plt.title("Segmented (Felzenszwalb)")
+plt.axis('off')
+
+plt.show()
